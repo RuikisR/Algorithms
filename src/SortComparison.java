@@ -42,7 +42,16 @@ class SortComparison {
      *
      */
     static double [] selectionSort (double a[]){
-    	return null;
+    	for (int i = 0; i < a.length - 1; i++) {
+    		int lo = i;
+    		for (int j = i + 1; j < a.length; j++) {
+    			if (a[j] < a[lo]) {
+    				lo = j;
+    			}
+    		}
+    		swap(a, i, lo);
+    	}
+    	return a;
     }
 
     /**
