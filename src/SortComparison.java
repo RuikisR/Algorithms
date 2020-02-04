@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 // -------------------------------------------------------------------------
 
 /**
@@ -8,7 +13,8 @@
  *  @version HT 2020
  */
 
- class SortComparison {
+
+class SortComparison {
 
     /**
      * Sorts an array of doubles using InsertionSort.
@@ -18,10 +24,16 @@
      *
      */
     static double [] insertionSort (double a[]){
+    	for (int i = 1; i < a.length; i++) {
+    		int j = i;
+    		while (j > 0 && a[j - 1] > a[j]) {
+    			swap(a, j - 1, j);
+    			j--;
+    		}
+    	}
+    	return a;
+    }
 
-        //todo: implement the sort
-    }//end insertionsort
-	
 	    /**
      * Sorts an array of doubles using Selection Sort.
      * This method is static, thus it can be called as SortComparison.sort(a)
@@ -30,10 +42,8 @@
      *
      */
     static double [] selectionSort (double a[]){
-
-         //todo: implement the sort
-
-    }//end selectionsort
+    	return null;
+    }
 
     /**
      * Sorts an array of doubles using Quick Sort.
@@ -43,10 +53,8 @@
      *
      */
     static double [] quickSort (double a[]){
-	
-		 //todo: implement the sort
-
-    }//end quicksort
+    	return null;
+    }
 
     /**
      * Sorts an array of doubles using Merge Sort.
@@ -64,13 +72,11 @@
      */
 
     static double[] mergeSortIterative (double a[]) {
+    	return null;
+    }
 
-		 //todo: implement the sort
-	
-    }//end mergesortIterative
-    
-    
-    
+
+
     /**
      * Sorts an array of doubles using recursive implementation of Merge Sort.
      * This method is static, thus it can be called as SortComparison.sort(a)
@@ -79,22 +85,57 @@
      * @return after the method returns, the array must be in ascending sorted order.
      */
     static double[] mergeSortRecursive (double a[]) {
-    	
+    	return null;
+   }
 
-    	//todo: implement the sort
-	
-   }//end mergeSortRecursive
-    	
+
+    private static void swap(double[] a, int i, int j) {
+    	double tmp = a[i];
+    	a[i] = a[j];
+    	a[j] = tmp;
+    }
     
+    public static boolean isOrdered(double[] a) {
+    	for (int i = 1; i < a.length; i++) {
+    		if (a[i] < a[i - 1]) {
+    			return false; 
+    		}
+    	}
+    	return true;
+    }
 
 
-   
-
+    public static double[] getDoubles(String fileName) {
+    	ArrayList<Double> doubles = new ArrayList<Double>();
+    	try {
+    		FileReader reader = new FileReader(fileName);
+    		BufferedReader buffer = new BufferedReader(reader);
+    		boolean end = false;
+    		while (!end) {
+    			String value = buffer.readLine();
+    			if (value != null) {
+    				doubles.add(Double.parseDouble(value));
+    			}
+    			else {
+    				end = true;
+    			}
+    		}
+    		buffer.close();
+    		reader.close();
+    	} catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    	double[] doublesA = new double[doubles.size()];
+    	for (int i = 0; i < doubles.size(); i++) {
+    		doublesA[i] = doubles.get(i);
+    	}
+    	return doublesA;
+    }
 
     public static void main(String[] args) {
 
-        //todo: do experiments as per assignment instructions
     }
-
- }//end class
+}//end class
 

@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +30,15 @@ public class SortComparisonTest
     @Test
     public void testEmpty()
     {
+    	
+    }
+    
+    @Test
+    public void insertionTest() {
+    	double[] numbers = SortComparison.getDoubles("numbers10.txt");
+    	assertFalse("Unordered 10 values", SortComparison.isOrdered(numbers));
+    	numbers = SortComparison.insertionSort(numbers);
+    	assertTrue("Ordered 10 values", SortComparison.isOrdered(numbers));
     }
 
 
