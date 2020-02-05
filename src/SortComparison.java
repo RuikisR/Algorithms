@@ -94,7 +94,45 @@ class SortComparison {
      * @return after the method returns, the array must be in ascending sorted order.
      */
     static double[] mergeSortRecursive (double a[]) {
-    	return null;
+    	if (a.length == 1) {
+    		return a;
+    	}
+    	else {
+    		int mid = a.length / 2;
+    		double[] L = new double[mid];
+    		double[] R = new double[a.length - mid];
+    		for (int i = 0; i < a.length; i++) {
+    			if (i < mid) {
+    				L[i] = a[i];
+    			}
+    			else {
+    				R[i - mid] = a[i];
+    			}
+    		}
+    		L = mergeSortRecursive(L);
+    		R = mergeSortRecursive(R);
+    		
+    		int i = 0;
+    		int j = 0;
+    		int k = 0;
+    		while (i < L.length && j < R.length) {
+    			if (L[i] <= R[j]) {
+    				a[k++] = L[i++];
+    			}
+    			else {
+    				a[k++] = R[j++];
+    			}
+    		}
+    		
+    		while (i < L.length) {
+    			a[k++] = L[i++];
+    		}
+    		
+    		while (j < R.length) {
+    			a[k++] = R[j++];
+    		}
+    		return a;
+    	}
    }
 
 

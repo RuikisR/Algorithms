@@ -48,6 +48,14 @@ public class SortComparisonTest
     	numbers = SortComparison.selectionSort(numbers);
     	assertTrue("Ordered 10 values", SortComparison.isOrdered(numbers));
     }
+    
+    @Test
+    public void mergeRecursiveTest() {
+    	double[] numbers = SortComparison.getDoubles("numbers10.txt");
+    	assertFalse("Unordered 10 values", SortComparison.isOrdered(numbers));
+    	numbers = SortComparison.mergeSortRecursive(numbers);
+    	assertTrue("Ordered 10 values", SortComparison.isOrdered(numbers));
+    }
 
 
     // TODO: add more tests here. Each line of code and ech decision in Collinear.java should
