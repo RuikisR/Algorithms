@@ -30,6 +30,7 @@ public class SortComparisonTest
     @Test
     public void testEmpty()
     {
+    	//assertTrue("Empty is sorted", SortComparison.isOrdered(empty));
     	
     }
     
@@ -54,6 +55,22 @@ public class SortComparisonTest
     	double[] numbers = SortComparison.getDoubles("numbers10.txt");
     	assertFalse("Unordered 10 values", SortComparison.isOrdered(numbers));
     	numbers = SortComparison.mergeSortRecursive(numbers);
+    	assertTrue("Ordered 10 values", SortComparison.isOrdered(numbers));
+    }
+    
+    @Test
+    public void mergeIterativeTest() {
+    	double[] numbers = SortComparison.getDoubles("numbers10.txt");
+    	assertFalse("Unordered 10 values", SortComparison.isOrdered(numbers));
+    	numbers = SortComparison.mergeSortIterative(numbers);
+    	assertTrue("Ordered 10 values", SortComparison.isOrdered(numbers));
+    }
+    
+    @Test
+    public void quickTest() {
+    	double[] numbers = SortComparison.getDoubles("numbers10.txt");
+    	assertFalse("Unordered 10 values", SortComparison.isOrdered(numbers));
+    	numbers = SortComparison.quickSort(numbers);
     	assertTrue("Ordered 10 values", SortComparison.isOrdered(numbers));
     }
 

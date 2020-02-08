@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 // -------------------------------------------------------------------------
 
 /**
@@ -62,7 +63,28 @@ class SortComparison {
      *
      */
     static double [] quickSort (double a[]){
-    	return null;
+    	quickSort(a, 0, a.length - 1);
+    	return a;
+    }
+    
+    private static void quickSort(double[] a, int l, int r) {
+    	if (l < r) {
+    		int p = partition(a, l, r);
+    		quickSort(a, l, p - 1);
+    		quickSort(a, p + 1, r);
+    	}
+    }
+    
+    private static int partition(double[] a, int l, int r) {
+    	double p = a[r];
+    	int i = l - 1;
+    	for (int j = l; j < r; j++) {
+    		if (a[j] < p) {
+    			swap(a, ++i, j);
+    		}
+    	}
+    	swap(a, i + 1, r);
+    	return i + 1;
     }
 
     /**
@@ -81,7 +103,15 @@ class SortComparison {
      */
 
     static double[] mergeSortIterative (double a[]) {
-    	return null;
+    	int n = a.length;
+    	for (int m = 1; m <= n - 1; m *= 2) {
+    		for (int l = 0; l < n - 1; l += 2 * m) {
+    			int mid = Integer.min(l + m - 1, n - 1);
+    			int r = Integer.min(l + 2 * m - 1, n - 1);
+    			merge(a, l, mid, r);
+    		}
+    	}
+    	return a;
     }
 
 
@@ -94,46 +124,53 @@ class SortComparison {
      * @return after the method returns, the array must be in ascending sorted order.
      */
     static double[] mergeSortRecursive (double a[]) {
-    	if (a.length == 1) {
-    		return a;
+    	mergeSortRecursive(a, 0, a.length - 1);
+    	return a;
+   }
+    
+    private static void mergeSortRecursive(double[] a, int l, int r) {
+    	if (l < r) {
+    		int m = (l + r) / 2;
+    		
+    		mergeSortRecursive(a, l, m);
+    		mergeSortRecursive(a, m + 1, r);
+    		
+    		merge(a, l, m, r);
     	}
-    	else {
-    		int mid = a.length / 2;
-    		double[] L = new double[mid];
-    		double[] R = new double[a.length - mid];
-    		for (int i = 0; i < a.length; i++) {
-    			if (i < mid) {
-    				L[i] = a[i];
-    			}
-    			else {
-    				R[i - mid] = a[i];
-    			}
-    		}
-    		L = mergeSortRecursive(L);
-    		R = mergeSortRecursive(R);
-    		
-    		int i = 0;
-    		int j = 0;
-    		int k = 0;
-    		while (i < L.length && j < R.length) {
-    			if (L[i] <= R[j]) {
-    				a[k++] = L[i++];
-    			}
-    			else {
-    				a[k++] = R[j++];
-    			}
-    		}
-    		
-    		while (i < L.length) {
+    }
+    
+    
+    private static void merge(double[] a, int l, int m, int r) {
+    	int n1 = m - l + 1;
+    	int n2 = r - m;
+    	
+    	double[] L = new double[n1];
+    	double[] R = new double[n2];
+    	
+    	for (int i = 0; i < n1; ++i) {
+    		L[i] = a[l + i];
+    	}
+    	for (int j = 0; j < n2; ++j) {
+    		R[j] = a[m + 1 + j];
+    	}
+    	
+    	int i = 0, j = 0, k = l;
+ 
+    	while (i < n1 && j < n2) {
+    		if (L[i] <= R[j]) {
     			a[k++] = L[i++];
     		}
-    		
-    		while (j < R.length) {
+    		else {
     			a[k++] = R[j++];
     		}
-    		return a;
     	}
-   }
+    	while (i < n1) {
+    		a[k++] = L[i++];
+    	}
+    	while (j < n2) {
+    		a[k++] = R[j++];
+    	}
+    }
 
 
     private static void swap(double[] a, int i, int j) {
@@ -169,11 +206,8 @@ class SortComparison {
     		}
     		buffer.close();
     		reader.close();
-    	} catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    	} catch (FileNotFoundException e) {} 
+    	  catch (IOException e) {}
     	double[] doublesA = new double[doubles.size()];
     	for (int i = 0; i < doubles.size(); i++) {
     		doublesA[i] = doubles.get(i);
