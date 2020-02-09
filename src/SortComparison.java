@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 // -------------------------------------------------------------------------
 
 /**
@@ -213,10 +212,6 @@ class SortComparison {
     		doublesA[i] = doubles.get(i);
     	}
     	return doublesA;
-    }
-
-    public static void main(String[] args) {
-
     }
 }//end class
 
