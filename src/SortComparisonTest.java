@@ -28,6 +28,25 @@ import org.junit.runners.JUnit4;
  * 10000 Reverse Order		90265		 40423				  684					   1112				 53103
  * 10000 Sorted				   16		 33485				  748					   1277				 74829
  * 100000 Random		  4364672	   3228129	 			18796					  18971				 10193
+ * 
+ * 	A) The effectiveness of all these algorithms is affected by the order of the input:
+ * 			Insertion: Already sorted arrays are ideal, while reverse sorted arrays give the worst case
+ * 			Selection: Same as Insertion
+ * 			Merge (Both): Better with a partially sorted array
+ * 			Quick: Best on average but terrible with the array sorted or reverse sorted
+ * 
+ * 	B) Insertion sort performs poorly with large unsorted arrays but quickly handles near sorted array
+ * 	C) Quick Sort seems to scale the best to larger inputs
+ *  D) In general the iterative version appears to work better on smaller inputs and randomised ones, while they 
+ *  		perform near identically at large inputs with the exception of recursive working better for arrays
+ *  		already in some order.
+ *  E)  1. Insertion
+ *  	2. Iterative Merge
+ *  	3. Iterative Merge
+ *  	4. Iterative Merge
+ *  	5. Quick
+ *  	6. Iterative Merge
+ *  	7. Insertion
  */
 
 @RunWith(JUnit4.class)
